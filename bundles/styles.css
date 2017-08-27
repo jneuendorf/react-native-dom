@@ -1,0 +1,24 @@
+@import url(../node_modules/animate.css/animate.min.css);
+button[type="button"] {
+  border: none;
+  padding: 8px;
+  text-align: center; }
+
+body.ios button[type="button"] {
+  background-color: white;
+  color: #007AFF;
+  font-size: 18px; }
+  body.ios button[type="button"][disabled] {
+    color: #cdcdcd; }
+
+body.android button[type="button"] {
+  elevation: 4;
+  background-color: #2196F3;
+  border-radius: 2px;
+  color: white;
+  font-weight: 500;
+  text-transform: uppercase; }
+  body.android button[type="button"][disabled] {
+    elevation: 0;
+    background-color: #dfdfdf;
+    color: #a1a1a1; }
