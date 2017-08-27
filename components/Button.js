@@ -17,12 +17,31 @@ export class Button extends React.Component {
     constructor(props) {
         super(props)
         this.state = {animate: false}
+        this.timer = null
+    }
+
+    componentWillUnmount() {
+        this.resetTimer()
     }
 
     handleOnPress() {
-        console.log("TODO: animation");
-        this.setState({animate: true})
+        this.resetTimer()
+        this.setState({animate: true}, () => {
+            if (this.state.animate && !this.timer) {
+                this.timer = setTimeout(() => {
+                    this.setState({animate: false})
+                    this.resetTimer()
+                }, 300)
+            }
+        })
         this.props.onPress()
+    }
+
+    resetTimer() {
+        if (this.timer) {
+            clearTimeout(this.timer)
+            this.timer = null
+        }
     }
 
     render() {

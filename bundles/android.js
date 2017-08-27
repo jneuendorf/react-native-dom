@@ -9947,20 +9947,43 @@ var Button = exports.Button = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (Button.__proto__ || Object.getPrototypeOf(Button)).call(this, props));
 
         _this.state = { animate: false };
+        _this.timer = null;
         return _this;
     }
 
     _createClass(Button, [{
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
+            this.resetTimer();
+        }
+    }, {
         key: 'handleOnPress',
         value: function handleOnPress() {
-            console.log("TODO: animation");
-            this.setState({ animate: true });
+            var _this2 = this;
+
+            this.resetTimer();
+            this.setState({ animate: true }, function () {
+                if (_this2.state.animate && !_this2.timer) {
+                    _this2.timer = setTimeout(function () {
+                        _this2.setState({ animate: false });
+                        _this2.resetTimer();
+                    }, 300);
+                }
+            });
             this.props.onPress();
+        }
+    }, {
+        key: 'resetTimer',
+        value: function resetTimer() {
+            if (this.timer) {
+                clearTimeout(this.timer);
+                this.timer = null;
+            }
         }
     }, {
         key: 'render',
         value: function render() {
-            var _this2 = this;
+            var _this3 = this;
 
             var _props = this.props,
                 color = _props.color,
@@ -9981,7 +10004,7 @@ var Button = exports.Button = function (_React$Component) {
                     type: 'button',
                     className: this.state.animate ? "animated flash" : "",
                     onClick: function onClick() {
-                        return _this2.handleOnPress();
+                        return _this3.handleOnPress();
                     },
                     disabled: disabled,
                     style: style },

@@ -1,6 +1,22 @@
-@import url(../node_modules/animate.css/animate.min.css);
+.animated {
+  animation-duration: 1s;
+  animation-fill-mode: forwards; }
+
+.animated.infinite {
+  animation-iteration-count: infinite; }
+
+@keyframes flash {
+  0%,to {
+    opacity: 1; }
+  30% {
+    opacity: 0; } }
+.flash {
+  animation-duration: 0.3s;
+  animation-name: flash; }
+
 button[type="button"] {
   border: none;
+  outline: none;
   padding: 8px;
   text-align: center; }
 
