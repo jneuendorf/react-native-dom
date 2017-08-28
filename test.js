@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 
 import {
     Button,
+    View
 } from './components'
 import Platform from './Platform'
 
@@ -15,11 +16,11 @@ const onButtonPress = () => console.log("pressed a button")
 export class Root extends React.Component {
     render() {
         return (
-            <div>
+            <View>
                 <Button title="button" onPress={onButtonPress}></Button>
                 <Button title="button" onPress={onButtonPress} color="purple"></Button>
                 <Button title="button" onPress={onButtonPress} disabled={true}></Button>
-            </div>
+            </View>
         )
     }
 }

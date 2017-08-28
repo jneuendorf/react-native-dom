@@ -45,8 +45,7 @@ export class Button extends React.Component {
     }
 
     render() {
-        const {color, disabled=false, title} = this.props
-        const style = {}
+        const {color, disabled=false, style={}, title} = this.props
         if (color) {
             Object.assign(style, Platform.select({
                 android: {backgroundColor: color},
@@ -56,6 +55,7 @@ export class Button extends React.Component {
         return (
             <button
                 type="button"
+                data-native-type="Button"
                 className={this.state.animate ? "animated flash" : ""}
                 onClick={() => this.handleOnPress()}
                 disabled={disabled}

@@ -6578,6 +6578,18 @@ Object.keys(_Button).forEach(function (key) {
   });
 });
 
+var _View = __webpack_require__(193);
+
+Object.keys(_View).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _View[key];
+    }
+  });
+});
+
 /***/ }),
 /* 50 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -9815,7 +9827,7 @@ var Root = exports.Root = function (_React$Component) {
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
-                'div',
+                _components.View,
                 null,
                 _react2.default.createElement(_components.Button, { title: 'button', onPress: onButtonPress }),
                 _react2.default.createElement(_components.Button, { title: 'button', onPress: onButtonPress, color: 'purple' }),
@@ -9959,9 +9971,10 @@ var Button = exports.Button = function (_React$Component) {
                 color = _props.color,
                 _props$disabled = _props.disabled,
                 disabled = _props$disabled === undefined ? false : _props$disabled,
+                _props$style = _props.style,
+                style = _props$style === undefined ? {} : _props$style,
                 title = _props.title;
 
-            var style = {};
             if (color) {
                 Object.assign(style, _Platform2.default.select({
                     android: { backgroundColor: color },
@@ -9972,6 +9985,7 @@ var Button = exports.Button = function (_React$Component) {
                 'button',
                 {
                     type: 'button',
+                    'data-native-type': 'Button',
                     className: this.state.animate ? "animated flash" : "",
                     onClick: function onClick() {
                         return _this3.handleOnPress();
@@ -22790,6 +22804,146 @@ var _Platform2 = _interopRequireDefault(_Platform);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _Platform2.default._init("ios", "10.3");
+
+/***/ }),
+/* 193 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.View = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(189);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(191);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _Platform = __webpack_require__(84);
+
+var _Platform2 = _interopRequireDefault(_Platform);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var View = exports.View = function (_React$Component) {
+    _inherits(View, _React$Component);
+
+    function View() {
+        _classCallCheck(this, View);
+
+        return _possibleConstructorReturn(this, (View.__proto__ || Object.getPrototypeOf(View)).apply(this, arguments));
+    }
+
+    _createClass(View, [{
+        key: 'handleOnResponderMove',
+        value: function handleOnResponderMove(event) {
+            if (typeof this.props.onResponderMove === 'function') {
+                this.props.onResponderMove(event);
+            }
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var _this2 = this;
+
+            var _props = this.props,
+                pointerEvents = _props.pointerEvents,
+                _props$style = _props.style,
+                style = _props$style === undefined ? {} : _props$style,
+                props = _objectWithoutProperties(_props, ['pointerEvents', 'style']);
+
+            var children = props.children;
+            // TODO: This does probably not behave correctly.
+
+            if (pointerEvents) {
+                switch (pointerEvents) {
+                    case "none":
+                        Object.assign(style, { pointerEvents: "none" });
+                        break;
+                    case "box-none":
+                        Object.assign(style, { pointerEvents: "none" });
+                        children = children.map(function (child) {
+                            return _react2.default.cloneElement(child, { style: { pointerEvents: "all" } });
+                        });
+                        break;
+                    case "box-only":
+                        Object.assign(style, { pointerEvents: "all" });
+                        children = children.map(function (child) {
+                            return _react2.default.cloneElement(child, { style: { pointerEvents: "none" } });
+                        });
+                        break;
+                }
+            }
+            return _react2.default.createElement(
+                'div',
+                {
+                    'data-native-type': 'View',
+                    onTouchMove: function onTouchMove(event) {
+                        return _this2.handleOnResponderMove(event);
+                    },
+                    onDrag: function onDrag(event) {
+                        return _this2.handleOnResponderMove(event);
+                    },
+                    style: style },
+                children
+            );
+        }
+    }]);
+
+    return View;
+}(_react2.default.Component);
+
+View.propTypes = {
+    accessibilityLabel: _propTypes2.default.string,
+    accessible: _propTypes2.default.bool,
+    hitSlop: _propTypes2.default.object,
+    onAccessibilityTap: _propTypes2.default.func,
+    onLayout: _propTypes2.default.func,
+    onMagicTap: _propTypes2.default.func,
+    onMoveShouldSetResponder: _propTypes2.default.func,
+    onMoveShouldSetResponderCapture: _propTypes2.default.func,
+    onResponderGrant: _propTypes2.default.func,
+    onResponderMove: _propTypes2.default.func,
+    onResponderReject: _propTypes2.default.func,
+    onResponderRelease: _propTypes2.default.func,
+    onResponderTerminate: _propTypes2.default.func,
+    onResponderTerminationRequest: _propTypes2.default.func,
+    onStartShouldSetResponder: _propTypes2.default.func,
+    onStartShouldSetResponderCapture: _propTypes2.default.func,
+    pointerEvents: _propTypes2.default.oneOf(['box-none', 'none', 'box-only', 'auto']),
+    removeClippedSubviews: _propTypes2.default.bool,
+    // TODO: set correct constraint
+    style: _propTypes2.default.any,
+    testID: _propTypes2.default.string,
+    // ANDROID
+    accessibilityComponentType: _propTypes2.default.oneOf(['none', 'button', 'radiobutton_checked', 'radiobutton_unchecked']),
+    accessibilityLiveRegion: _propTypes2.default.oneOf(['none', 'polite', 'assertive']),
+    collapsable: _propTypes2.default.bool,
+    importantForAccessibility: _propTypes2.default.oneOf(['auto', 'yes', 'no', 'no-hide-descendants']),
+    nativeID: _propTypes2.default.string,
+    needsOffscreenAlphaCompositing: _propTypes2.default.bool,
+    renderToHardwareTextureAndroid: _propTypes2.default.bool,
+    // IOS
+    accessibilityTraits: _propTypes2.default.oneOf(['none', 'button', 'link', 'header', 'search', 'image', 'selected', 'plays', 'key', 'text', 'summary', 'disabled', 'frequentUpdates', 'startsMedia', 'adjustable', 'allowsDirectInteraction', 'pageTurn']),
+    accessibilityViewIsModal: _propTypes2.default.bool,
+    shouldRasterizeIOS: _propTypes2.default.bool
+};
 
 /***/ })
 /******/ ]);
