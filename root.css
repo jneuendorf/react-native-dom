@@ -1,0 +1,12 @@
+body {
+    background-color: lightgray;
+}
+
+#root {
+    background-color: white;
+    border-radius: 3px;
+    box-shadow: 0 0 10px gray;
+    margin: 0 auto;
+    max-width: 1024px;
+    padding: 10px;
+}

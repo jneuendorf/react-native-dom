@@ -43,6 +43,7 @@
         "webpack-dev-server": "^2.4.5"
     },
     "dependencies": {
+        "ez.js": "^1.0.3",
         "file-loader": "^0.11.2",
         "prop-types": "^15.5.10",
         "react": "^15.5.4",
