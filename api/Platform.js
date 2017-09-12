@@ -1,4 +1,4 @@
-class Platform {
+export class Platform {
     static OS = null
     static Version = null
     static _initted = false

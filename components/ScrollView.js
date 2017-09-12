@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {easeInOutCubic as easing} from 'ez.js';
 
-import Platform from '../Platform'
+import {Platform} from '../api'
 import {View} from './View'
 import {styleSheetPropTypes, viewPropTypes, colorPropType} from '../prop-types'
 
@@ -195,12 +195,12 @@ export class ScrollView extends React.Component {
         }
         // FOR TESTING:
         // if (onScroll) {
-        //     this.scrollTo({y: 400, animated: true})
+        //     // this.scrollTo({y: 400, animated: true})
         //     this.scrollToEnd({animated: true})
         // }
         // else {
         //     this.scrollToEnd({animated: true})
-        //     this.scrollTo({x: 100, animated: true})
+        //     // this.scrollTo({x: 100, animated: true})
         // }
     }
 

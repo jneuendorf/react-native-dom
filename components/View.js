@@ -1,11 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import Platform from '../Platform'
+import {StyleProcessingComponent} from './'
+import {Platform} from '../api'
 import {viewPropTypes} from '../prop-types'
 
 
-export class View extends React.Component {
+export class View extends StyleProcessingComponent {
     static propTypes = viewPropTypes
 
     constructor(props) {
@@ -28,29 +29,47 @@ export class View extends React.Component {
         this.setState({mouseDown: false})
     }
 
+    componentDidMount() {
+        const {onLayout} = this.props
+        if (onLayout) {
+            // TODO
+            onLayout({nativeEvent: {layout: {}}})
+        }
+    }
+
     render() {
-        const {pointerEvents, style={}, divRef, nativeType, ...props} = this.props
-        let {children} = props
+        let {
+            pointerEvents,
+            style=[],
+            divRef,
+            nativeType="View",
+            onLayout,
+            children,
+            ...props,
+        } = this.props
         // TODO: This does probably not behave correctly.
         if (pointerEvents) {
             switch (pointerEvents) {
                 case "none":
-                    Object.assign(style, {pointerEvents: "none"})
+                    style = style.concat([{pointerEvents: "none"}])
                     break
                 case "box-none":
-                    Object.assign(style, {pointerEvents: "none"})
+                    style = style.concat([{pointerEvents: "none"}])
                     children = children.map(child => React.cloneElement(child, {style: {pointerEvents: "all"}}))
                     break
                 case "box-only":
-                    Object.assign(style, {pointerEvents: "all"})
+                    style = style.concat([{pointerEvents: "all"}])
                     children = children.map(child => React.cloneElement(child, {style: {pointerEvents: "none"}}))
                     break
             }
         }
+        style = this.processStyle(style)
+        // console.log(style, nativeType, this.constructor.name);
         return (
             <div
+                {...props}
                 ref={divRef}
-                data-native-type={nativeType || "View"}
+                data-native-type={nativeType}
                 onTouchMove={event => this.handleOnResponderMove(event)}
                 onMouseDown={event => this.handleOnMouseDown(event)}
                 onMouseUp={event => this.handleOnMouseUp(event)}
@@ -59,7 +78,6 @@ export class View extends React.Component {
                         this.handleOnResponderMove(event)
                     }
                 }}
-                {...props}
                 style={style}
             >
                 {children}

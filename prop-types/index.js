@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types'
 
 
-export const colorPropType = {}
+export const colorPropTypes = {}
+
+export const ColorPropType = PropTypes.shape(colorPropTypes)
 
 export const styleSheetPropTypes = {}
 

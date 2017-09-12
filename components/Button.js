@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import Platform from '../Platform'
+import {Platform} from '../api'
 
 
 export class Button extends React.Component {

@@ -1,0 +1,10 @@
+[data-native-type="ActivityIndicator"]
+    display: flex
+    > div
+        background: 50% 50% no-repeat white
+
+body.android
+    [data-native-type="ActivityIndicator"] > div.still
+        animation-play-state: paused !important
+        *
+            animation-play-state: paused !important

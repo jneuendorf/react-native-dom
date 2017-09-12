@@ -43,6 +43,15 @@
     30%
         opacity: 0
 
+@include keyframes(spin)
+    100%
+        transform: rotate(360deg)
+
 .flash
     animation-duration: 0.3s
     animation-name: flash
+
+.spin
+    // animation-duration: 0.7s
+    // animation-name: spin
+    animation: spin 0.9s linear infinite
